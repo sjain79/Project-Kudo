@@ -19,12 +19,21 @@ public class JumpScript : MonoBehaviour
     {
         if (collision.relativeVelocity.y >= 0f)
         {
-
             if (collision.gameObject.CompareTag("Platform"))
             {
                 Vector2 jumpVector = new Vector2(playerRb.velocity.x, jumpForce);
                 playerRb.velocity = jumpVector;
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+            Debug.Log("Player Death");
+
+        if (collision.gameObject.CompareTag("Background"))
+        {
+            Debug.Log("Player Death");
         }
     }
 }

@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3540af6e42f50df4fbdbdb78fb24bebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 7
+  jumpForce: 8
 --- !u!50 &229893341
 Rigidbody2D:
   serializedVersion: 4
@@ -473,9 +473,10 @@ GameObject:
   m_Component:
   - component: {fileID: 848434201}
   - component: {fileID: 848434202}
+  - component: {fileID: 848434203}
   m_Layer: 0
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -487,8 +488,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 848434200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.23230883, y: 0.011062495, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.02, y: 0.011, z: 10}
+  m_LocalScale: {x: 0.5564779, y: 0.9871444, z: 1}
   m_Children: []
   m_Father: {fileID: 26127411}
   m_RootOrder: 0
@@ -537,6 +538,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!68 &848434203
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 848434200}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -5.1633587, y: -5.0142517}
+  - {x: 5.0579147, y: -5.014252}
 --- !u!1 &888723146
 GameObject:
   m_ObjectHideFlags: 0
