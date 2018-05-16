@@ -13,11 +13,12 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     float spawnMinY, spawnMaxY;
 
+    [SerializeField]
     int maxNumberOfPlatforms;
     
     public static int numberOfPlatforms=0;
 
-    float lastPlatformY=1f;
+    float lastPlatformY= -3.08f;
 
     private void Start()
     {
