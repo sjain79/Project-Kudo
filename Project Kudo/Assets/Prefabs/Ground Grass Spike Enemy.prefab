@@ -136,8 +136,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.8876928, y: 0.2302661}
-  - {x: 0.89040166, y: 0.2302661}
+  - {x: -0.94910944, y: 0.23282497}
+  - {x: 0.9390234, y: 0.23794302}
 --- !u!95 &95268784613754218
 Animator:
   serializedVersion: 3

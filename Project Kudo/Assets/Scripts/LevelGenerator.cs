@@ -8,6 +8,9 @@ public class LevelGenerator : MonoBehaviour
     GameObject[] platformPrefabs;
 
     [SerializeField]
+    GameObject cloudPrefab;
+
+    [SerializeField]
     float screenWidth;
 
     [SerializeField]
@@ -23,11 +26,13 @@ public class LevelGenerator : MonoBehaviour
 
     int maxTypeOfPlatform = 8;
 
-    static int score;
+    static float score;
 
     Vector2 startPosition;
 
     GameObject player;
+
+    float previousScore=0;
 
     private void Start()
     {
@@ -35,7 +40,7 @@ public class LevelGenerator : MonoBehaviour
         {
             SpawnPlatform();
         }
-
+   
         player = GameObject.FindGameObjectWithTag("Player");
         startPosition = player.transform.position;
 
@@ -47,8 +52,17 @@ public class LevelGenerator : MonoBehaviour
         {
             SpawnPlatform();
         }
+        score = (player.transform.position.y - startPosition.y);
+        score *= 10;
+        Debug.Log("Score " + (int)score);
 
-        score = (int)(player.transform.position.y - startPosition.y);
+
+        if (score>=previousScore+20)
+        {
+            Instantiate(cloudPrefab, new Vector2(Random.Range(-screenWidth, screenWidth), player.transform.position.y + 2f), Quaternion.identity);
+            previousScore = score;
+        }
+
     }
 
     private void SpawnPlatform()

@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 4258666627317912}
   - component: {fileID: 212853295355893184}
   - component: {fileID: 60914350091831910}
+  - component: {fileID: 114528648897922570}
   m_Layer: 0
   m_Name: Cloud Enemy
   m_TagString: Enemy
@@ -186,6 +187,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114528648897922570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1116723609086170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8be05a7dd9085b64999f87eead4d58b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212832140690176260
 SpriteRenderer:
   m_ObjectHideFlags: 1

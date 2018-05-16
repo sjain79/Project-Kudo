@@ -46,5 +46,13 @@ public class JumpScript : MonoBehaviour
         {
             playerSpriteRenderer.sprite = normalSprite;
         }
+
+        //if (playerRb.velocity.y==0)
+        //{
+        //    Vector2 jumpVector = new Vector2(playerRb.velocity.x, jumpForce);
+        //    playerRb.velocity = jumpVector;
+        //}
+
+        Debug.Log("velocity "+playerRb.velocity.y);
     }
 }
