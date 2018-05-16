@@ -29,8 +29,6 @@ public class JumpScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            Debug.Log("Player Death");
-
         if (collision.gameObject.CompareTag("Background"))
         {
             Debug.Log("Player Death");
