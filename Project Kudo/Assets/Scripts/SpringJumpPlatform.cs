@@ -7,6 +7,9 @@ public class SpringJumpPlatform : MonoBehaviour
     [SerializeField]
     float jumpForce;
 
+    [SerializeField]
+    Sprite jumpSprite;
+
     bool wasUsed = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -25,9 +28,10 @@ public class SpringJumpPlatform : MonoBehaviour
                     springAnim.SetTrigger("Spring Jump");
 
                     wasUsed = true;
+
+                   collision.gameObject.GetComponent<SpriteRenderer>().sprite = jumpSprite;
                 }
             }
         }
     }
-
 }

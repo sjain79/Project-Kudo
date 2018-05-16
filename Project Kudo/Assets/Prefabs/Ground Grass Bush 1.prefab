@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4630535307257458}
   - component: {fileID: 212560802505065456}
+  - component: {fileID: 114685623956519360}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -101,6 +102,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389a6df3813fa594b8fb3684ac4b6264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114685623956519360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270901907395410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6598e7cbdaeec21459bfe90503aff197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 0.665
 --- !u!212 &212560802505065456
 SpriteRenderer:
   m_ObjectHideFlags: 1

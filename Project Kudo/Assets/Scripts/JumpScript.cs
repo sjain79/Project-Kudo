@@ -9,13 +9,15 @@ public class JumpScript : MonoBehaviour
     float jumpForce;
 
     [SerializeField]
-    Sprite jumpingSprite;
+    Sprite normalSprite;
 
     Rigidbody2D playerRb;
+    SpriteRenderer playerSpriteRenderer;
 
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,6 +42,9 @@ public class JumpScript : MonoBehaviour
 
     private void Update()
     {
-       
+        if (playerRb.velocity.y < 0)
+        {
+            playerSpriteRenderer.sprite = normalSprite;
+        }
     }
 }
