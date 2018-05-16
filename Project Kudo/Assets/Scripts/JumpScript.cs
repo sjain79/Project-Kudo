@@ -8,6 +8,9 @@ public class JumpScript : MonoBehaviour
     [SerializeField]
     float jumpForce;
 
+    [SerializeField]
+    Sprite jumpingSprite;
+
     Rigidbody2D playerRb;
 
     private void Awake()
@@ -33,5 +36,10 @@ public class JumpScript : MonoBehaviour
         {
             Debug.Log("Player Death");
         }
+    }
+
+    private void Update()
+    {
+       
     }
 }
