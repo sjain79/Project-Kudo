@@ -26,8 +26,11 @@ public class JumpScript : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Platform"))
             {
+                Debug.Log("Collided with platform");
                 Vector2 jumpVector = new Vector2(playerRb.velocity.x, jumpForce);
-                playerRb.velocity = jumpVector;
+                //playerRb.velocity = jumpVector;
+                playerRb.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+                Debug.Log("Velocity " + playerRb.velocity);
             }
         }
     }
@@ -53,6 +56,6 @@ public class JumpScript : MonoBehaviour
         //    playerRb.velocity = jumpVector;
         //}
 
-        Debug.Log("velocity "+playerRb.velocity.y);
+        //Debug.Log("velocity "+playerRb.velocity.y);
     }
 }

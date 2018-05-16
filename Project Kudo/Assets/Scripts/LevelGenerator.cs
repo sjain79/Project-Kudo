@@ -54,12 +54,12 @@ public class LevelGenerator : MonoBehaviour
         }
         score = (player.transform.position.y - startPosition.y);
         score *= 10;
-        Debug.Log("Score " + (int)score);
+        //Debug.Log("Score " + (int)score);
 
 
         if (score>=previousScore+20)
         {
-            Instantiate(cloudPrefab, new Vector2(Random.Range(-screenWidth, screenWidth), player.transform.position.y + 2f), Quaternion.identity);
+            //Instantiate(cloudPrefab, new Vector2(Random.Range(-screenWidth, screenWidth), player.transform.position.y + 2f), Quaternion.identity);
             previousScore = score;
         }
 
