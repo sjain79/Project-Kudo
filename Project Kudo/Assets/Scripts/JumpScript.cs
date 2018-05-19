@@ -14,32 +14,31 @@ public class JumpScript : MonoBehaviour
     Rigidbody2D playerRb;
     SpriteRenderer playerSpriteRenderer;
 
+    PlayerScript playerScript;
+
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        playerScript = GetComponent<PlayerScript>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.relativeVelocity.y >= 0f)
+        if (!playerScript.isInBubble)
         {
-            if (collision.gameObject.CompareTag("Platform"))
+            if (collision.relativeVelocity.y >= 0f)
             {
-                Vector2 jumpVector = new Vector2(playerRb.velocity.x, jumpForce);
-                playerRb.velocity = jumpVector;
-                //playerRb.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+                if (collision.gameObject.CompareTag("Platform"))
+                {
+                    Vector2 jumpVector = new Vector2(playerRb.velocity.x, jumpForce);
+                    playerRb.velocity = jumpVector;
+                }
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Background"))
-        {
-            Debug.Log("Player Death");
-        }
-    }
+   
 
     private void Update()
     {

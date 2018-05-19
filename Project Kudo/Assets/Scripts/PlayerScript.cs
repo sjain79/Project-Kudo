@@ -10,6 +10,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     float diedUpForce;
 
+    public int coins;
+    public bool isInBubble;
+
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -18,12 +21,33 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (!isInBubble)
         {
-            myJumpScript.enabled = false;
-            playerRb.velocity = new Vector2(playerRb.velocity.x, diedUpForce);
-            playerRb.GetComponent<Collider2D>().enabled = false;
-            Debug.Log("Player Died");
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                myJumpScript.enabled = false;
+                playerRb.velocity = new Vector2(playerRb.velocity.x, diedUpForce);
+                playerRb.GetComponent<Collider2D>().enabled = false;
+                Debug.Log("Player Died");
+            }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isInBubble)
+        {
+            if (collision.gameObject.CompareTag("Background") || collision.gameObject.CompareTag("Enemy"))
+            {
+                Debug.Log("Player Death");
+            }
+        }
+    }
+
+    private void Update()
+    {
+        Debug.Log("Coins " + coins);
+    }
+
+
 }

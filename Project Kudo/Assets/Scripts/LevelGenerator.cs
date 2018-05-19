@@ -8,7 +8,7 @@ public class LevelGenerator : MonoBehaviour
     GameObject[] platformPrefabs;
 
     [SerializeField]
-    GameObject cloudPrefab;
+    GameObject cloudPrefab, wingMan, coin;
 
     [SerializeField]
     float screenWidth;
@@ -32,7 +32,7 @@ public class LevelGenerator : MonoBehaviour
 
     GameObject player;
 
-    float previousScore=0;
+    float previousScore = 0;
 
     private void Start()
     {
@@ -40,10 +40,11 @@ public class LevelGenerator : MonoBehaviour
         {
             SpawnPlatform();
         }
-   
+
         player = GameObject.FindGameObjectWithTag("Player");
         startPosition = player.transform.position;
 
+        InvokeRepeating("SpawnCoins", 1.5f, 1.5f);
     }
 
     private void Update()
@@ -57,7 +58,7 @@ public class LevelGenerator : MonoBehaviour
         //Debug.Log("Score " + (int)score);
 
 
-        if (score>=previousScore+20)
+        if (score >= previousScore + 20)
         {
             //Instantiate(cloudPrefab, new Vector2(Random.Range(-screenWidth, screenWidth), player.transform.position.y + 2f), Quaternion.identity);
             previousScore = score;
@@ -97,6 +98,9 @@ public class LevelGenerator : MonoBehaviour
     }
 
 
-
+    private void SpawnCoins()
+    {
+        Instantiate(coin, new Vector2(Random.Range(-screenWidth, screenWidth), lastPlatformY + 2), Quaternion.identity);
+    }
 
 }
