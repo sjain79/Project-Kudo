@@ -13,6 +13,11 @@ public class PlayerScript : MonoBehaviour
     public int coins;
     public bool isInBubble;
 
+    [SerializeField]
+    GameObject rocket;
+
+    public bool rocketIsOn;
+
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -21,7 +26,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isInBubble)
+        if (!isInBubble && !rocketIsOn)
         {
             if (collision.gameObject.CompareTag("Enemy"))
             {
@@ -35,7 +40,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isInBubble)
+        if (!isInBubble && !rocketIsOn)
         {
             if (collision.gameObject.CompareTag("Background") || collision.gameObject.CompareTag("Enemy"))
             {
@@ -49,5 +54,15 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Coins " + coins);
     }
 
+    public void StartRocket()
+    {
+        rocket.SetActive(true);
+        rocketIsOn = true;
+    }
 
+    private void Start()
+    {
+        rocket.SetActive(false);
+        rocketIsOn = false;
+    }
 }

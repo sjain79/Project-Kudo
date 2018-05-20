@@ -8,7 +8,7 @@ public class LevelGenerator : MonoBehaviour
     GameObject[] platformPrefabs;
 
     [SerializeField]
-    GameObject cloudPrefab, wingMan, coin;
+    GameObject cloudPrefab, wingMan, coin, bubble, rocket;
 
     [SerializeField]
     float screenWidth;

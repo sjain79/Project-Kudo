@@ -25,7 +25,7 @@ public class JumpScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!playerScript.isInBubble)
+        if (!playerScript.isInBubble && !playerScript.rocketIsOn)
         {
             if (collision.relativeVelocity.y >= 0f)
             {
