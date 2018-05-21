@@ -86,6 +86,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114080586261022162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,7 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8014aa023756b4a418a1feae14e07f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldCoinEffectPrefab: {fileID: 0}
+  goldCoinEffectPrefab: {fileID: 1287649778785714, guid: b2efe80049fbc594e94dbf93565cbe58,
+    type: 2}
 --- !u!114 &114566979596596418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,6 +125,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

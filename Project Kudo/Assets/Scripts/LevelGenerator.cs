@@ -24,7 +24,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     float lastPlatformY = -3.08f;
 
-    int maxTypeOfPlatform = 8;
+    int maxTypeOfPlatform = 9;
 
     static float score;
 
@@ -53,8 +53,12 @@ public class LevelGenerator : MonoBehaviour
         {
             SpawnPlatform();
         }
-        score = (player.transform.position.y - startPosition.y);
-        score *= 10;
+
+        if (score < (player.transform.position.y - startPosition.y) * 10)
+        {
+            score = (player.transform.position.y - startPosition.y);
+            score *= 10;
+        }
         //Debug.Log("Score " + (int)score);
 
 
@@ -91,6 +95,7 @@ public class LevelGenerator : MonoBehaviour
             case 8:
                 platformType = 4;
                 break;
+
         }
 
         Instantiate(platformPrefabs[platformType], new Vector2(Random.Range(-screenWidth, screenWidth), lastPlatformY += Random.Range(spawnMinY, spawnMaxY)), Quaternion.identity);
@@ -101,6 +106,45 @@ public class LevelGenerator : MonoBehaviour
     private void SpawnCoins()
     {
         Instantiate(coin, new Vector2(Random.Range(-screenWidth, screenWidth), lastPlatformY + 2), Quaternion.identity);
+    }
+
+    private void SpawnWorld ()
+    {
+        int itemType=0;
+        switch (Random.Range(0,20))
+        {
+            case 0:
+            case 1:
+            case 2: itemType = 0; //normalplatform
+                break;
+            case 3:
+            case 4:
+            case 5: itemType = 1; //platform with a bush
+                break;
+            case 6:
+            case 7:
+            case 8: itemType = 2; //breakable platform
+                break;
+            case 9:
+            case 10: itemType = 3;//platform with spring
+                break;
+            case 11:
+            case 12: itemType = 4; //platform with enemy
+                break;
+            case 13:
+                itemType = 5; //cloud enemy
+                break;
+            case 14: itemType = 6; //Wing man enemy
+                break;
+            case 15: itemType = 7; //rocket power up;
+                break;
+            case 16:
+            case 17: itemType = 8; //bubble power up
+                break;
+
+        }
+
+        Instantiate(platformPrefabs[itemType], new Vector2(Random.Range(-screenWidth, screenWidth), lastPlatformY += Random.Range(spawnMinY, spawnMaxY)), Quaternion.identity);
     }
 
 }
