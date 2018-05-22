@@ -8,7 +8,7 @@ public class LevelGenerator : MonoBehaviour
     GameObject[] platformPrefabs;
 
     [SerializeField]
-    GameObject cloudPrefab, wingMan, coin, bubble, rocket;
+    GameObject cloudPrefab, wingMan, coin, bubble, rocketPlatform;
 
     [SerializeField]
     float screenWidth;
@@ -34,6 +34,13 @@ public class LevelGenerator : MonoBehaviour
 
     float previousScore = 0;
 
+    [SerializeField]
+    GameObject lastGameObjectSpawned;
+
+    bool increaseMinSpawn;
+
+    float enemySpawnerFrequency=2.7f;
+    float powerUpSpawnerFrequency = 2.7f;
     private void Start()
     {
         for (int i = numberOfPlatforms; i < maxNumberOfPlatforms; ++i)
@@ -44,7 +51,9 @@ public class LevelGenerator : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         startPosition = player.transform.position;
 
-        InvokeRepeating("SpawnCoins", 1.5f, 1.5f);
+        InvokeRepeating("SpawnCoins", 1, 1);
+        InvokeRepeating("SpawnEnemy", enemySpawnerFrequency, enemySpawnerFrequency);
+        InvokeRepeating("SpawnPowerUp", powerUpSpawnerFrequency, powerUpSpawnerFrequency);
     }
 
     private void Update()
@@ -58,23 +67,14 @@ public class LevelGenerator : MonoBehaviour
         {
             score = (player.transform.position.y - startPosition.y);
             score *= 10;
-        }
-        //Debug.Log("Score " + (int)score);
-
-
-        if (score >= previousScore + 20)
-        {
-            //Instantiate(cloudPrefab, new Vector2(Random.Range(-screenWidth, screenWidth), player.transform.position.y + 2f), Quaternion.identity);
-            previousScore = score;
-        }
-
+        }        
     }
 
     private void SpawnPlatform()
     {
         int platformType = 0;
 
-        switch (Random.Range(0, maxTypeOfPlatform))
+        switch (Random.Range(0, 11))
         {
             case 0:
             case 1:
@@ -83,68 +83,92 @@ public class LevelGenerator : MonoBehaviour
                 break;
             case 3:
             case 4:
+            case 5: 
                 platformType = 1;
                 break;
-            case 5:
             case 6:
+            case 7:
+            case 8:
                 platformType = 2;
                 break;
-            case 7:
+            case 9:
                 platformType = 3;
                 break;
-            case 8:
-                platformType = 4;
-                break;
+            case 10:
+                {
+                    if (Random.value > 0.5f)
+                    {
+                        platformType = 4;
+                    }
+                    else
+                    {
+                        platformType = 1;
+                    }
+                    break;
+                }
 
         }
 
-        Instantiate(platformPrefabs[platformType], new Vector2(Random.Range(-screenWidth, screenWidth), lastPlatformY += Random.Range(spawnMinY, spawnMaxY)), Quaternion.identity);
+
+
+        lastGameObjectSpawned = Instantiate(platformPrefabs[platformType], new Vector2(Random.Range(-screenWidth, screenWidth), lastGameObjectSpawned.transform.position.y + Random.Range(spawnMinY, spawnMaxY)), Quaternion.identity);
+
         numberOfPlatforms++;
     }
 
 
     private void SpawnCoins()
     {
-        Instantiate(coin, new Vector2(Random.Range(-screenWidth, screenWidth), lastPlatformY + 2), Quaternion.identity);
+        lastGameObjectSpawned= Instantiate(coin, new Vector2(Random.Range(-screenWidth, screenWidth), lastGameObjectSpawned.transform.position.y + 0.35f), Quaternion.identity);
     }
 
-    private void SpawnWorld ()
+    private void SpawnEnemy()
     {
-        int itemType=0;
-        switch (Random.Range(0,20))
+        if (Random.value>0.5)
+        { 
+            lastGameObjectSpawned = Instantiate(cloudPrefab, new Vector2(Random.Range(-screenWidth, screenWidth), lastGameObjectSpawned.transform.position.y + Random.Range(1.8f, 2.2f)), Quaternion.identity);
+        }
+        else
         {
-            case 0:
-            case 1:
-            case 2: itemType = 0; //normalplatform
-                break;
-            case 3:
-            case 4:
-            case 5: itemType = 1; //platform with a bush
-                break;
-            case 6:
-            case 7:
-            case 8: itemType = 2; //breakable platform
-                break;
-            case 9:
-            case 10: itemType = 3;//platform with spring
-                break;
-            case 11:
-            case 12: itemType = 4; //platform with enemy
-                break;
-            case 13:
-                itemType = 5; //cloud enemy
-                break;
-            case 14: itemType = 6; //Wing man enemy
-                break;
-            case 15: itemType = 7; //rocket power up;
-                break;
-            case 16:
-            case 17: itemType = 8; //bubble power up
-                break;
+            lastGameObjectSpawned = Instantiate(wingMan, new Vector2(Random.Range(-screenWidth, screenWidth), lastGameObjectSpawned.transform.position.y + Random.Range (1.8f,2.2f)), Quaternion.identity);
+        }
+    }
 
+    private void SpawnPowerUp()
+    {
+        if (Random.value > 0.5)
+        {
+            lastGameObjectSpawned = Instantiate(rocketPlatform, new Vector2(Random.Range(-screenWidth, screenWidth), lastGameObjectSpawned.transform.position.y + Random.Range(0.1f, 0.3f)), Quaternion.identity);
+            increaseMinSpawn = true;
+        }
+        else
+        {
+            lastGameObjectSpawned = Instantiate(bubble, new Vector2(Random.Range(-screenWidth, screenWidth), lastGameObjectSpawned.transform.position.y + Random.Range(00.1f, 0.3f)), Quaternion.identity);
+        }
+    }
+
+    private void IncreaseDifficulty()
+    {
+        if (score >= 30 && score % 30 == 0 && enemySpawnerFrequency > 1.2f)
+        {
+            enemySpawnerFrequency -= 0.15f;
         }
 
-        Instantiate(platformPrefabs[itemType], new Vector2(Random.Range(-screenWidth, screenWidth), lastPlatformY += Random.Range(spawnMinY, spawnMaxY)), Quaternion.identity);
+        if (score >=40 && score%40==0 && powerUpSpawnerFrequency>1.4f)
+        {
+            powerUpSpawnerFrequency -= 0.15f;
+        }
+
+        if (score >=28 && score %28==0 && spawnMinY<1)
+        {
+            spawnMinY += 0.1f;
+        }
+
+        if ((score >= 32 && score % 32 == 0 && spawnMinY < 1.8))
+        {
+            spawnMaxY += 0.1f;
+        }
+        
     }
 
 }
